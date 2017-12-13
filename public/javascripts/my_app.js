@@ -10,4 +10,14 @@ controller('myController', ['$scope', '$http',
     $scope.user = {};
     $scope.error = data;
   });
+
+  $scope.Todos = [
+    {text:'say hello', done:false}
+  ];
+
+  $scope.AddTodo = function() {
+    $scope.Todos.push({text:$scope.TodoText, done:false});
+    $scope.TodoText='';
+  };
+
 }]);

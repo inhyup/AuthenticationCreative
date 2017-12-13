@@ -13,8 +13,18 @@
         </h2>
         <a id="logoutLink" href="/logout">logout</a>
         <a id="editLink" href="/user">Edit User</a>
-        <p>Place Your Code Here
-            <p>
+        
+        <div>
+            <h5>To Do</h5>
+            <form ng-submit="AddTodo()">
+                <input size="12" type="text" ng-model="TodoText"></input>
+            </form>    
+        </div>
+        <div ng-repeat="Todo in Todos">
+            <input type="checkbox" ng-model="Todo.done"/>
+            <span class="done-{{Todo.done}}" >{{Todo.text}}</span>
+        </div>
+
     </div>
     <hr>
     <span id="indexMsg">
