@@ -5,7 +5,7 @@ var UserSchema = new Schema({
     email: String,
     color: String,
     hashed_password: String,
-    todo: [String]
+    comment: String
 });
 
 mongoose.model('User', UserSchema);
