@@ -12,7 +12,7 @@ controller('myController', ['$scope', '$http',
   });
 
   $scope.Todos = [
-    {text:'say hello', done:false}
+    
   ];
 
   $scope.AddTodo = function() {
