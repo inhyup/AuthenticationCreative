@@ -55,30 +55,4 @@ router.post('/login', users.login);
 router.get('/user/profile', users.getUserProfile);
 
 
-router.get('/comment', function(req,res,next) {
-  console.log("Comment");
-  Comment.find(function(err, commentList) {
-    if(err) return console.error(err);
-    else {
-      console.log(commentList);
-      res.json(commentList);
-    }
-  });  
-});
-
-router.post('/comment', users.comment);
-
-
-
-
-router.post('/deleteComments', function(req, res, next) {
-  console.log("delete")
-  Comment.remove({}, function(err, removed) {
-    if(err) return console.error(err);
-    console.log(removed);
-  })
-
-});
-
-
 module.exports = router;
