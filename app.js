@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var mongoStore = require('connect-mongo')({session: expressSession});
 var mongoose = require('mongoose');
-var io = require('socket.io')(http);
 require('./models/users_model.js');
 var conn = mongoose.connect('mongodb://localhost/myapp', { useMongoClient: true });
 
