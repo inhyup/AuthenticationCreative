@@ -12,7 +12,7 @@ controller('myController', ['$scope', '$http',
   });
 
   var ref = firebase.database().ref().child("messages");
-  $scope.chats = $firebaseArray(ref);
+  $scope.chats = $http(ref);
   $scope.update = function(user) {
       var newmessage = {from:user.name || "anonymous",body:user.chat};
       console.log(newmessage);
