@@ -66,17 +66,8 @@ router.get('/comment', function(req,res,next) {
   });  
 });
 
+router.post('/comment', users.comment);
 
-router.post('/comment', function(req, res, next) {
-  console.log("Comment Post");
-  console.log("req.body");
-  var newComment = new Comment(req.body);
-  newComment.save(function(err, post) {
-    if(err) return console.error(err);
-    console.log(post);
-    res.sendStatus(200);
-  });
-});
 
 
 
