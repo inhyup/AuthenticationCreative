@@ -1,36 +1,62 @@
 <!doctype html>
-<html ng-app="myApp"> 
-    
+<html ng-app="myApp">
 <head>
-    <title>User Login and Sessions</title>
-    <script src="http://code.angularjs.org/1.2.9/angular.min.js"></script>
-    <script src="/javascripts/my_app.js"></script>
+<title> User Login and Sessions</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyANVL1oQg5bI0T9ApQF5G783fkMKuqoTiQ",
+    authDomain: "chat-58373.firebaseapp.com",
+    databaseURL: "https://chat-58373.firebaseio.com",
+    projectId: "chat-58373",
+    storageBucket: "chat-58373.appspot.com",
+    messagingSenderId: "116588441294"
+  };
+  firebase.initializeApp(config);
+</script>
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+<!-- Your Javascript -->
+<script src="javascripts/script.js"></script>
 </head>
-        
-<body>  
-    <div ng-controller="myController">
-        <h2 id="welcomeText">Welcome. You are Logged In as
-            <%= username %>
-        </h2>
-        <a id="logoutLink" href="/logout">logout</a>
-        <a id="editLink" href="/user">Edit User</a>
-        
-       
 
-    </div>
-    <hr>
-    <span id="indexMsg">
-        <%= msg %>
-    </span>
-    <hr>
-    <span id="colorText">
-    Color
-        <%= color %>
-      </span>
-    
+<body>
+
+<div class="row">
+<div class="col-md-6">
+
+<div class="form-container">
+<div class="page-header">
+<h2 id="welcomeText">Welcome. You are Logged In as
+            <%= username %>
+</h2>
+</div>
+<strong> 
+<a id="logoutLink" href="/logout">Logout</a><br>
+
+  <a id="back" href="/user"> Profile</a><br>
+
+<div ng-controller="chatController">
+<form novalidate class="simple-form">
+  Name: <input type="text" ng-model="user.name" /><br />
+  Chat: <input type="text" ng-model="user.chat" /><br /></strong>
+  <input type="submit" ng-click="update(user)" value="Save" />
+</form>
+
+<ul>
+<li ng-repeat='line in chats'>
+<strong>{{line.from}} - {{line.body}}</strong>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </body>
-      
 </html>
