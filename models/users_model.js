@@ -7,4 +7,8 @@ var UserSchema = new Schema({
     hashed_password: String
 });
 
+var ChatSchema = new Schema({
+    message: String
+});
+
 mongoose.model('User', UserSchema);
