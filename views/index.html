@@ -44,7 +44,7 @@
 
 <div ng-controller="chatController">
 <form novalidate class="simple-form">
-  Name: <input type="text" ng-model="user.name" /><br />
+  Name: <input type="text" ng-model="user.name" placeholder="<%= username %>" readonly/><br />
   Chat: <input type="text" ng-model="user.chat" /><br /></strong>
   <input type="submit" ng-click="update(user)" value="Save" />
 </form>
