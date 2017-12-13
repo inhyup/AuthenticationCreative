@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var expressSession = require('express-session');
-var io = require('socket.io')(http);
+
 var users = require('../controllers/users_controller');
 console.log("before / Route");
 router.get('/', function(req, res){
@@ -54,21 +54,39 @@ router.post('/user/delete', users.deleteUser);
 router.post('/login', users.login);
 router.get('/user/profile', users.getUserProfile);
 
-var count=1;
-io.on('connection', function(socket){
-  console.log('user connected: ', socket.id);
-  var name = "user" + count++;
-  io.to(socket.id).emit('change name',name);
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected: ', socket.id);
+router.get('/comment', function(req,res,next) {
+  console.log("Comment");
+  Comment.find(function(err, commentList) {
+    if(err) return console.error(err);
+    else {
+      console.log(commentList);
+      res.json(commentList);
+    }
+  });  
+});
+
+
+router.post('/comment', function(req, res, next) {
+  console.log("Comment Post");
+  console.log("req.body");
+  var newComment = new Comment(req.body);
+  newComment.save(function(err, post) {
+    if(err) return console.error(err);
+    console.log(post);
+    res.sendStatus(200);
   });
-  
-  socket.on('send message', function(name,text){
-    var msg = name + ' : ' + text;
-    console.log(msg);
-    io.emit('receive message', msg);
-  });
+});
+
+
+
+router.post('/deleteComments', function(req, res, next) {
+  console.log("delete")
+  Comment.remove({}, function(err, removed) {
+    if(err) return console.error(err);
+    console.log(removed);
+  })
+
 });
 
 

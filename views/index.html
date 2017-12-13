@@ -18,35 +18,26 @@
         <a id="logoutLink" href="/logout">logout</a>
         <a id="editLink" href="/user">Edit User</a>
         
-        <h1>Chat Room</h1>
-        <div>
-          <textarea id="chatLog" class="chat_log" readonly></textarea>
-        </div>
-        
-        <form id="chat">
-          <input id="name" class="name" type="text" readonly>
-          <input id="message" class="message" type="text">
-          <input type="submit" class="chat" value="chat"/>
+        <form method="POST" id="commentForm" action="/comment">
+            <label for="name">Name: </label>
+            <%= username %><br>
+            <label for="comment">comment: </label>
+            <input type="text" id="comment" placeholder="Comment"><br>
+            <input type="submit" id="save" value="Save">
         </form>
-        <div id="box" class="box">
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.js"></script>
-        <script>
-          var socket = io();
-          $('#chat').on('submit', function(e){
-            socket.emit('send message', $('#name').val(), $('#message').val());
-            $('#message').val("");
-            $("#message").focus();
-            e.preventDefault();
-          });
-          socket.on('receive message', function(msg){
-            $('#chatLog').append(msg+"\n");
-            $('#chatLog').scrollTop($('#chatLog')[0].scrollHeight);
-          });
-          socket.on('change name', function(name){
-            $('#name').val(name);
-          });
-        </script>
+    
+        <form method="POST" action="/deleteComments">
+            <input type="submit" id="deleteComment" value="Delete Comment"/>
+        </form>
+
+        <form method="GET" action="/comment">
+            
+        </form>
+        
+        <div id="json"></div>
+        <div id="done"></div>
+        <div id="comments"></div>
+
 
 
     </div>

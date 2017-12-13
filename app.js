@@ -15,10 +15,6 @@ var users = require('./routes/users');
 
 var app = express();
 
-app.get("/",function(req, res){
-    res.sendfile("index.html");
-  });
-
 app.use(expressSession({
   secret: 'SECRET',
   cookie: {maxAge:2628000000},
