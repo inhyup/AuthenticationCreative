@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var mongoStore = require('connect-mongo')({session: expressSession});
 var mongoose = require('mongoose');
+var io = require('socket.io')(http);
 require('./models/users_model.js');
 var conn = mongoose.connect('mongodb://localhost/myapp', { useMongoClient: true });
 
@@ -73,5 +74,26 @@ app.use(function(err, req, res, next) {
     });
 });
 
+
+app.get("/",function(req, res){
+    res.sendfile("client.html");
+  });
+  
+  var count=1;
+  io.on('connection', function(socket){
+    console.log('user connected: ', socket.id);
+    var name = "user" + count++;
+    io.to(socket.id).emit('change name',name);
+  
+    socket.on('disconnect', function(){
+      console.log('user disconnected: ', socket.id);
+    });
+    
+    socket.on('send message', function(name,text){
+      var msg = name + ' : ' + text;
+      console.log(msg);
+      io.emit('receive message', msg);
+    });
+  });
 
 module.exports = app;
